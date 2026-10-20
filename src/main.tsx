@@ -15,7 +15,6 @@ function App(){
  const[error,setError]=useState('');
  const canvas=useRef<HTMLCanvasElement>(null);
  useEffect(()=>{localStorage.setItem('folio-preset',preset)},[preset]);
- useEffect(()=>{if(!file)return;let cancelled=false;const task=getDocument({data:new Uint8Array([])});void task;},[]);
  useEffect(()=>{if(!file)return;let active=true;file.arrayBuffer().then(buffer=>getDocument({data:new Uint8Array(buffer)}).promise).then(doc=>{if(active){setPdf(doc);setPage(1);setError('')}}).catch(()=>{if(active)setError('This PDF could not be opened.')});return()=>{active=false}},[file]);
  useEffect(()=>{if(!pdf||!canvas.current)return;let stopped=false;let renderTask:any;
  pdf.getPage(page).then(p=>{if(stopped)return;const width=Math.min(window.innerWidth-40,850);const base=p.getViewport({scale:1});const viewport=p.getViewport({scale:Math.max(.3,width/base.width)*zoom});const c=canvas.current!;const ctx=c.getContext('2d');if(!ctx)return;c.width=Math.ceil(viewport.width*devicePixelRatio);c.height=Math.ceil(viewport.height*devicePixelRatio);c.style.width=viewport.width+'px';c.style.height=viewport.height+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);renderTask=p.render({canvasContext:ctx,viewport});return renderTask.promise}).catch(e=>{if(e?.name!=='RenderingCancelledException')setError('Unable to render this page.')});return()=>{stopped=true;renderTask?.cancel()}},[pdf,page,zoom]);
