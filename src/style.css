@@ -37,3 +37,25 @@ main[data-preset=book] .toolbar{background:#f5f0e6}
  .customization-panel{position:fixed;top:auto;bottom:0;left:0;right:0;width:100%;max-height:min(88dvh,720px);overflow-y:auto;border-radius:22px 22px 0 0;padding:24px max(20px,env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
  .customization-panel:before{content:"";display:block;width:42px;height:4px;background:var(--border);border-radius:3px;margin:-11px auto 18px}
 }
+
+/* File reading and live, non-blocking customization */
+.text-reading-surface{min-height:75vh;padding:40px 22px 100px;overflow-wrap:anywhere}
+.text-theme-paper{background:#faf9f5;color:#252525}
+.text-theme-sepia{background:#f0e5cf;color:#3b3026}
+.text-theme-dark{background:#1c222a;color:#e8edf2}
+.text-reading-content{margin:0 auto;white-space:pre-wrap;word-break:break-word}
+.text-reading-content p{margin:0 0 1.3em}
+.text-controls{display:grid;gap:12px;margin-top:18px}
+.text-controls>label{display:grid;gap:7px;font-size:13px;font-weight:650}
+.text-controls select{width:100%;padding:10px;border:1px solid var(--border);border-radius:9px;background:var(--bg);color:var(--ink)}
+.toolbar .text-reset{margin-top:5px}
+@media(min-width:781px){
+ .customization-panel{position:fixed;right:16px;top:92px;max-height:calc(100dvh - 110px);overflow:auto}
+ .customization-scrim{display:none}
+ .reading:has(.customization-panel) .page,.reading:has(.customization-panel) .text-reading-surface{padding-right:min(380px,34vw)}
+}
+@media(max-width:780px){
+ .customization-scrim{background:transparent}
+ .customization-panel{max-height:46dvh;box-shadow:0 -12px 35px #0004}
+ .text-reading-surface{padding:25px 20px 80px}
+}
