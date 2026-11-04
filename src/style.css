@@ -59,3 +59,5 @@ main[data-preset=book] .toolbar{background:#f5f0e6}
  .customization-panel{max-height:46dvh;box-shadow:0 -12px 35px #0004}
  .text-reading-surface{padding:25px 20px 80px}
 }
+
+.footer-credit{white-space:nowrap}.footer-credit a{color:inherit;text-decoration:underline;text-underline-offset:3px}.footer-credit a:hover,.footer-credit a:focus-visible{opacity:1;color:var(--accent)}
